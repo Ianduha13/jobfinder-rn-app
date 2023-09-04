@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 
 const rapidApiKey = process.env.EXPO_PUBLIC_RAPID_API_KEY
 
-const useFetch = ({ endpoint, query }) => {
+const useFetch = (endpoint, query) => {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -23,13 +23,12 @@ const useFetch = ({ endpoint, query }) => {
     setIsLoading(true)
     try {
       const response = await axios.request(options)
-      setData(response.data)
+      console.log(response)
+      setData(response.data.data)
       setIsLoading(false)
     } catch (error) {
       setError(error)
-      alert(
-        "Something went wrong. Please check your internet connection and try again."
-      )
+      console.log(error)
     } finally {
       setIsLoading(false)
     }
